@@ -1,55 +1,49 @@
 #!/bin/bash
 
-### Output paths
-root_output="output"
-source_dir="${root_output}/source_files" 
-target_dir="${root_output}/target_files"
-output_dir="${root_output}/output_files"
-enhanced_folder="${root_output}/enhanced_files"
+
+if [ -f .env ]; then
+    source .env
+else
+    echo ".env file not found! Copy [ example.env -> .env ] and make sure all settings are correct."
+    exit 1
+fi
 
 # Function to print detailed debug information
 debug_info() {
     echo "----- DEBUG INFO -----"
-    echo "Timestamp: $(date)"
-    echo "Script name: $0"
-    echo "User: $(whoami)"
-    echo "Current directory: $(pwd)"
-    echo "Docker container ID: $(hostname)"
-
     echo "Environment Variables:"
     echo "MANY_FACES: $MANY_FACES"
-    echo "Frame Processor: $frame_processor"
-    echo "Max Memory: ${max_mem} GB"
-    echo "Threads: $threads"
-    echo "Video Encoder: $video_encoder"
+    echo "Frame Processor: $FRAME_PROCESSOR"
+    echo "Max Memory: ${MAX_MEM} GB"
+    echo "Threads: $THREADS"
+    echo "Video Encoder: $VIDEO_ENCODER"
     echo "USE_GPU: $USE_GPU"
     echo "USE_VIDEO_ARGS: $USE_VIDEO_ARGS"
-    echo "Video Quality: $video_quality"
+    echo "Video Quality: $VIDEO_QUALITY"
 
     echo "Output Paths:"
-    echo "Root Output: $root_output"
-    echo "Source Directory: $source_dir"
-    echo "Target Directory: $target_dir"
-    echo "Output Directory: $output_dir"
-    echo "Enhanced Folder: $enhanced_folder"
+    echo "Root Output: $OUTPUT_DIR"
+    echo "Source Directory: $SOURCE_FOLDER"
+    echo "Target Directory: $TARGET_FOLDER"
+    echo "Output Directory: $OUTPUT_FOLDER"
     echo "-----------------------"
 }
 
 # Use when processing in UI mode
 ui() {
     local cmd="python3 run.py \
-        --execution-threads ${threads} \
-        --max-memory ${max_mem}"
+        --execution-threads ${THREADS} \
+        --max-memory ${MAX_MEM}"
 
     if [[ "${USE_VIDEO_ARGS}" == true ]]; then
-        cmd+=" --video-encoder ${video_encoder} --video-quality ${video_quality}"
+        cmd+=" --video-encoder ${VIDEO_ENCODER} --video-quality ${VIDEO_QUALITY}"
     fi
 
     if [[ "${MANY_FACES}" == true ]]; then
         cmd+=" --many-faces"
     fi
     if [[ "${USE_GPU}" != false ]]; then
-        cmd+=" --execution-provider ${USE_GPU}"
+        cmd+=" --execution-provider ${EXECUTION_PROVIDER}"
     fi
     
     if [[ "${DEBUG}" == true ]]; then
@@ -66,9 +60,7 @@ ui() {
 
 # Startup
 
-## Create workdir folders
-mkdir -p "${output_dir}"
-mkdir -p "${enhanced_folder}"
+mkdir -p "${OUTPUT_DIR}"
 
 if [[ "${DEBUG}" == true ]]; then
     debug_info
