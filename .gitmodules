@@ -7,3 +7,6 @@
 [submodule "iRoopDeepFaceCam-avgr"]
 	path = iRoopDeepFaceCam-avgr
 	url = https://github.com/AVGR-Labs/iRoopDeepFaceCam-avgr
+[submodule "Deep-Batch-Swapper"]
+	path = Deep-Batch-Swapper
+	url = https://github.com/luna-nightbyte/Deep-Batch-Swapper
