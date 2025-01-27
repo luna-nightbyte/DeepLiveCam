@@ -1,12 +1,3 @@
-[submodule "Deep-Live-Cam-Multi-Language"]
-	path = Deep-Live-Cam-Multi-Language
-	url = https://github.com/AVGRadmin/Deep-Live-Cam-Multi-Language.git
 [submodule "Deep-Live-Cam"]
 	path = Deep-Live-Cam
 	url = https://github.com/hacksider/Deep-Live-Cam
-[submodule "iRoopDeepFaceCam-avgr"]
-	path = iRoopDeepFaceCam-avgr
-	url = https://github.com/AVGR-Labs/iRoopDeepFaceCam-avgr
-[submodule "Deep-Batch-Swapper"]
-	path = Deep-Batch-Swapper
-	url = https://github.com/luna-nightbyte/Deep-Batch-Swapper
