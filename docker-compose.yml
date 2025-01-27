@@ -1,7 +1,5 @@
-version: '3.8'
-
 services:
-  Deep-Batch-Swapper:
+  DeepLiveCam:
     container_name: ${CONTAINER_NAME}
     image: ${IMAGE_NAME}
     build:
