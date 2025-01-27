@@ -26,7 +26,7 @@ The environment variables have been moved from the bash script to the Docker Com
 - `MAX_MEM`: Maximum memory allocation for processing.
 - `THREADS`: Number of threads for processing.
 - `VIDEO_ENCODER`: Video encoder to use (e.g., `libx265`).
-- `EXECUTION_PROVIDER`: Set to cuda to enable GPU processing or `false` to disable. (Remember to enable by setting ÙSE_GPU=true`.
+- `EXECUTION_PROVIDER`: cuda or other execution provider. (Remember to enable by setting ÙSE_GPU=true`.
 - `USE_VIDEO_ARGS`: Set to `true` or `false` to include additional video processing arguments.
 - `VIDEO_QUALITY`: Set the video quality level.
 
