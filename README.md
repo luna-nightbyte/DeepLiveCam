@@ -19,16 +19,16 @@ A Docker Compose configuration that allows you to manage and switch between diff
 ### Makefile
 The Makefile now handles the environment variables previously managed by the bash script. It automates common tasks such as downloading and setting up models, building Docker images, and running the application. You can specify the service (fork) and Docker image to use without modifying the Makefile itself.
 
-### Environment Variables
+### Environment Variables (.env)
 The environment variables have been moved from the bash script to the Docker Compose and Makefile, allowing for easier configuration and customization based on your needs.
 - `MANY_FACES`: Set to true or false to enable or disable processing of multiple faces.
-- `frame_processor`: Set the type of frame processing (e.g., `face_swapper`).
-- `max_mem`: Maximum memory allocation for processing.
-- `threads`: Number of threads for processing.
-- `video_encoder`: Video encoder to use (e.g., `libx265`).
-- `USE_GPU`: Set to cuda to enable GPU processing or `false` to disable.
+- `FRAME_PROCESSOR`: Set the type of frame processing (e.g., `face_swapper`).
+- `MAX_MEM`: Maximum memory allocation for processing.
+- `THREADS`: Number of threads for processing.
+- `VIDEO_ENCODER`: Video encoder to use (e.g., `libx265`).
+- `EXECUTION_PROVIDER`: Set to cuda to enable GPU processing or `false` to disable. (Remember to enable by setting ÙSE_GPU=true`.
 - `USE_VIDEO_ARGS`: Set to `true` or `false` to include additional video processing arguments.
-- `video_quality`: Set the video quality level.
+- `VIDEO_QUALITY`: Set the video quality level.
 
 ## Repository Structure
 ### docker-compose.yml
@@ -62,39 +62,49 @@ make ui
 ```
 - ##### CLI Mode:
 ```bash
-make ui
+make cli
 ```
 - ##### Debug Mode:
 `make ui-debug` or `make cli-debug`
 #### Settings
 <details>
-  <summary>docker_script.sh</summary>
+  <summary>.env</summary>
 
 #####   Outputs
 These settings should be left as they are to ensure compatibility with future docker images. Possibly for changes in my own fork if you intend to use that.
-```bash
-### Output paths
-root_output="output"
-source_dir="${root_output}/source_files" 
-target_dir="${root_output}/target_files"
-output_dir="${root_output}/output_files"
-enhanced_folder="${root_output}/enhanced_files"
+```env
+# Directories
+APP_DIR=./Deep-Live-Cam
+STARTUP_SCRIPT=./docker_script.sh
+MODELS_DIR=./models
+OUTPUT_DIR=./output
 ```
 #####   App settings
 These are settings you probably wanna play around with and create the best ones for your usage. 
-```bash
-### Processor
-MANY_FACES=false # true/false
-frame_processor=face_swapper
-## Performance
-max_mem=6
-threads=4
-video_encoder=libx265
-USE_GPU=false # Change to cuda or whatever you need to use. 'false' disables.
-## Video
-USE_VIDEO_ARGS=false # true/false
-video_quality=0
+```env
+# Processor Settings
+SERVER_ONLY=false # If true, the container will wait for files to be sent from https://github.com/luna-nightbyte/GoMediaFlow. NOTE: Only works with Deet-Batch-Swap!!
+MANY_FACES=true
+FRAME_PROCESSOR=face_swapper,face_enhancer
+
+# Performance Settings
+MAX_MEM=16
+THREADS=4
+KEEP_AUDIO=true
+ALSO_ENHANCE_FACE=true
+
+# Video Settings
+USE_VIDEO_ARGS=false
+VIDEO_QUALITY=0
+VIDEO_ENCODER=libx265
+KEEP_FPS=true
+
+# GPU
+USE_GPU=true
+EXECUTION_PROVIDER=cuda
+GPU_COUNT=1
 ```
+
 </details>
 
 #### Building the Docker Image:
