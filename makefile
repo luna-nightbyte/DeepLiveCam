@@ -58,34 +58,7 @@ new-submodule:
 	git add .gitmodules $(SUBMODULE_NAME)/
 	git commit -m "Added submodule of repo $(SUBMODULE_NAME)"
 
-push-latest-submodule-to-git:
-	cd $(SUBMODULE_NAME)
-	git checkout main
-	git pull origin main
-	cd -
+push-latest-submodule-to-git: 
 	git add $(SUBMODULE_NAME)
-	git commit -m "Update $(SUBMODULE_NAME) to the latest main branch"
+	git commit -m "Update $(SUBMODULE_NAME) to the latest release"
 	git push origin main
-
-print-debug:
-	clear
-	@echo "#################################### DEBUG STARTUP"
-	@echo ""
-	@echo "Latest bash script:"
-	@echo '```'
-	@cat ./output/docker.sh
-	@echo '```'
-	@echo ""
-	@echo "docker-compose.yml:"
-	@echo '```'
-	@cat docker-compose.yml
-	@echo '```'
-	@echo ""
-	@echo "makefile:"
-	@echo '```'
-	@cat makefile
-	@echo '```'
-	@echo ""
-	@echo "#################################### DEBUG DONE"
-	@echo ""
-	@echo "Copy above message into any issues reported on GitHub!"

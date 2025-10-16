@@ -83,7 +83,6 @@ OUTPUT_DIR=./output
 These are settings you probably wanna play around with and create the best ones for your usage. 
 ```env
 # Processor Settings
-SERVER_ONLY=false # If true, the container will wait for files to be sent from https://github.com/luna-nightbyte/GoMediaFlow. NOTE: Only works with Deet-Batch-Swap!!
 MANY_FACES=true
 FRAME_PROCESSOR=face_swapper,face_enhancer
 
@@ -91,7 +90,6 @@ FRAME_PROCESSOR=face_swapper,face_enhancer
 MAX_MEM=16
 THREADS=4
 KEEP_AUDIO=true
-ALSO_ENHANCE_FACE=true
 
 # Video Settings
 USE_VIDEO_ARGS=false

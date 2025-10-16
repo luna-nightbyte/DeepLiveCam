@@ -1,12 +1,10 @@
 services:
   DeepLiveCam:
-    container_name: ${CONTAINER_NAME}
-    image: ${IMAGE_NAME}
+    container_name: batch-faceswap 
+    image: docker.io/lunanightbyte/deep-swap:latest
     build:
       context: .
-      dockerfile: ${DOCKERFILE_PATH}
-    ports:
-      - "${PORT}:${CONTAINER_PORT}"
+      dockerfile: docker/Dockerfile
     environment:
       # System environments
       - NVIDIA_VISIBLE_DEVICES=${NVIDIA_VISIBLE_DEVICES}
