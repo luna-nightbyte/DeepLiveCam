@@ -11,15 +11,15 @@ services:
       - DISPLAY=${DISPLAY}
     volumes:
       - ${APP_DIR}:/app
-      - ${STARTUP_SCRIPT}:/app/docker_script.sh
       - ${MODELS_DIR}/.insightface:/root/.insightface
       - ${MODELS_DIR}/.insightface:/app/.insightface
       - ${MODELS_DIR}/gfpgan:/app/gfpgan
       - ${MODELS_DIR}:/app/models
       - ${OUTPUT_DIR}:/app/output
       - /tmp/.X11-unix:/tmp/.X11-unix
-      - /dev/video0:/dev/video0
-      - /dev/video1:/dev/video1
+      
+      - ./docker/docker_cli.sh:/app/docker_script.sh
+      - ./.env:/app/.env
     deploy:
       resources:
         reservations:

@@ -30,11 +30,10 @@ RUN apt-get update && \
 
 RUN pip install --upgrade pip
 
-COPY ./docker/requirements_linux.txt /app/requirements.txt
+COPY ./Deep-Live-Cam/requirements.txt /app/requirements.txt
 
 RUN pip install --no-cache-dir -r /app/requirements.txt
 
 WORKDIR /app
-
-
+ 
 ENTRYPOINT ["/bin/bash", "docker_script.sh"]
