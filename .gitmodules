@@ -1,3 +1,6 @@
 [submodule "Deep-Live-Cam"]
 	path = Deep-Live-Cam
 	url = https://github.com/hacksider/Deep-Live-Cam
+[submodule "Deep-Live-Cam_Dockerized"]
+	path = Deep-Live-Cam_Dockerized
+	url = https://github.com/luna-nightbyte/Deep-Live-Cam_Dockerized
