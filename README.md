@@ -143,3 +143,14 @@ To use this repository effectively, ensure that your environment meets the follo
 - A CUDA-compatible GPU: Since the application is designed to utilize CUDA, you need a GPU that supports CUDA, along with the appropriate drivers installed on your system.
 
 - Make sure all these dependencies are installed and properly configured before running the application.
+
+
+## Stars to the Moon 🚀
+
+<a href="https://star-history.com/#luna-nightbyte/DeepLiveCam&Date">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=luna-nightbyte/DeepLiveCam&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=luna-nightbyte/DeepLiveCam&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=luna-nightbyte/DeepLiveCam&type=Date" />
+ </picture>
+</a>
