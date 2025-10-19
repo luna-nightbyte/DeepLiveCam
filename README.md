@@ -6,18 +6,11 @@ And special thanks to [s0md3v](https://github.com/s0md3v) for creating [Roop](ht
 
 
 
-## NB!
-I am mainly using Cuda version 12.2. This is mainly because i have other projects that depends on this version, and its easier for me to rely on that. I will add a dockerfile for cuda 11.8 at a later point. I have an existing [Docker image](https://hub.docker.com/layers/avgradmin/deep-swap/v0.0.6-cuda11.8/images/sha256-322d6fb27b849d691aeb9a962abefb0f597c4463e307a4ab7a5f992d14c482d3?context=repo)
-on the hub, but this is from an older deprecated development version and not compatiple with this repo as it is. Only image fully supported is [v0.1.2](https://hub.docker.com/layers/avgradmin/deep-swap/v0.1.2-cuda-12.2/images/sha256-17d70af9e9b3d18a3277b2e079248d1f033354ed6c773e89783863406a6533d8?context=repo) so far.
-Note that the original repo is made for cuda 11.8!
 ## Docker
 ### Dockerfile: 
-A Dockerfile optimized for building Docker images with CUDA version 12.2 support. 
+A Dockerfile optimized for building Docker images with CUDA version 12.8 support. 
 ### Docker Compose File: 
 A Docker Compose configuration that allows you to manage and switch between different forks of the application seamlessly. Each fork is defined by adding the folder as a volume, making it easy to add or switch forks by modifying the Docker Compose file.
-
-### Makefile
-The Makefile now handles the environment variables previously managed by the bash script. It automates common tasks such as downloading and setting up models, building Docker images, and running the application. You can specify the service (fork) and Docker image to use without modifying the Makefile itself.
 
 ### Environment Variables (.env)
 The environment variables have been moved from the bash script to the Docker Compose and Makefile, allowing for easier configuration and customization based on your needs.
@@ -27,7 +20,6 @@ The environment variables have been moved from the bash script to the Docker Com
 - `THREADS`: Number of threads for processing.
 - `VIDEO_ENCODER`: Video encoder to use (e.g., `libx265`).
 - `EXECUTION_PROVIDER`: cuda or other execution provider. (Remember to enable by setting ÙSE_GPU=true`.
-- `USE_VIDEO_ARGS`: Set to `true` or `false` to include additional video processing arguments.
 - `VIDEO_QUALITY`: Set the video quality level.
 
 ## Repository Structure
