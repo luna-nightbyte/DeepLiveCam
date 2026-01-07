@@ -36,4 +36,6 @@ RUN pip install --no-cache-dir -r /app/requirements.txt
 
 WORKDIR /app
  
+COPY Deep-Live-Cam_Dockerized/* .
+
 ENTRYPOINT ["/bin/bash", "docker_script.sh"]
