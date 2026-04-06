@@ -25,7 +25,8 @@ RUN git clone https://github.com/opencv/opencv.git && \
 RUN mkdir -p /opt/opencv/build
 WORKDIR /opt/opencv/build
 
-# Adjust CUDA_ARCH_BIN to match your specific GPU architecture (e.g., 8.9 for RTX 40-series)
+ENV LD_LIBRARY_PATH=/usr/local/cuda/lib64/stubs:$LD_LIBRARY_PATH
+
 RUN cmake -D CMAKE_BUILD_TYPE=RELEASE \
     -D CMAKE_INSTALL_PREFIX=/usr/local \
     -D WITH_CUDA=ON \
@@ -36,7 +37,9 @@ RUN cmake -D CMAKE_BUILD_TYPE=RELEASE \
     -D BUILD_opencv_python3=ON \
     -D HAVE_opencv_python3=ON \
     -D PYTHON_EXECUTABLE=/usr/bin/python3 \
-    -D CUDA_ARCH_BIN=8.6,8.9 \ 
+    -D CUDA_ARCH_BIN=8.6,8.9 \
+    # THE FIX:
+    -D CUDA_CUDA_LIBRARY=/usr/local/cuda/lib64/stubs/libcuda.so \
     .. && \
     make -j$(nproc) && \
     make install && \
