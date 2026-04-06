@@ -44,12 +44,10 @@ RUN cmake -D CMAKE_BUILD_TYPE=RELEASE \
 
 # --- Setup Application ---
 WORKDIR /app
-COPY ./Deep-Live-Cam/requirements.txt /app/requirements.txt
+COPY ./requirements.txt /app/requirements.txt
 
 # Remove opencv-python from requirements.txt if it's there to avoid overwriting our source build
 RUN sed -i '/opencv-python/d' /app/requirements.txt && \
     pip install --no-cache-dir -r /app/requirements.txt
-
-COPY Deep-Live-Cam_Dockerized/* .
 
 ENTRYPOINT ["/bin/bash", "docker_script.sh"]
