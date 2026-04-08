@@ -1,4 +1,4 @@
-FROM nvidia/cuda:12.8.1-cudnn-devel-ubuntu22.04
+FROM nvidia/cuda:12.2.2-cudnn8-devel-ubuntu22.04
 
 # Note: Switched to 'devel' image because we need nvcc and headers to compile OpenCV
 ENV DEBIAN_FRONTEND=noninteractive
@@ -25,8 +25,7 @@ RUN git clone https://github.com/opencv/opencv.git && \
 RUN mkdir -p /opt/opencv/build
 WORKDIR /opt/opencv/build
 
-ENV LD_LIBRARY_PATH=/usr/local/cuda/lib64/stubs:$LD_LIBRARY_PATH
-
+# Adjust CUDA_ARCH_BIN to match your specific GPU architecture (e.g., 8.9 for RTX 40-series)
 RUN cmake -D CMAKE_BUILD_TYPE=RELEASE \
     -D CMAKE_INSTALL_PREFIX=/usr/local \
     -D WITH_CUDA=ON \
@@ -38,7 +37,6 @@ RUN cmake -D CMAKE_BUILD_TYPE=RELEASE \
     -D HAVE_opencv_python3=ON \
     -D PYTHON_EXECUTABLE=/usr/bin/python3 \
     -D CUDA_ARCH_BIN=8.6,8.9 \
-    # THE FIX:
     -D CUDA_CUDA_LIBRARY=/usr/local/cuda/lib64/stubs/libcuda.so \
     .. && \
     make -j$(nproc) && \
@@ -50,7 +48,13 @@ WORKDIR /app
 COPY ./requirements.txt /app/requirements.txt
 
 # Remove opencv-python from requirements.txt if it's there to avoid overwriting our source build
-RUN sed -i '/opencv-python/d' /app/requirements.txt && \
+# BASICSR_EXT=False skips CUDA extension compilation which avoids setup_requires pulling
+# in a conflicting nvidia-cublas version from PyPI against the one already in the CUDA image
+ENV BASICSR_EXT=False
+RUN pip install --no-cache-dir --upgrade setuptools pip && \
+    sed -i '/opencv-python/d' /app/requirements.txt && \
     pip install --no-cache-dir -r /app/requirements.txt
+
+COPY Deep-Live-Cam_Dockerized/* .
 
 ENTRYPOINT ["/bin/bash", "docker_script.sh"]
