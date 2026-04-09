@@ -55,6 +55,6 @@ RUN pip install --no-cache-dir --upgrade setuptools pip && \
     sed -i '/opencv-python/d' /app/requirements.txt && \
     pip install --no-cache-dir -r /app/requirements.txt
 
-COPY Deep-Live-Cam_Dockerized/* .
+# COPY Deep-Live-Cam_Dockerized/* .
 
 ENTRYPOINT ["/bin/bash", "docker_script.sh"]
