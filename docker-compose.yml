@@ -1,7 +1,7 @@
 services:
   DeepLiveCam:
     container_name: batch-faceswap 
-    image: docker.io/lunanightbyte/deep-swap:v0.2.4-cuda-12.8
+    image: docker.io/lunanightbyte/deep-swap:v0.2.2-cuda-12.2
     build:
       context: .
       dockerfile: docker/Dockerfile
