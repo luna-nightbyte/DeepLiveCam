@@ -5,7 +5,7 @@ CUDA_VERSION := "12.2"
 
 MODEL_DIR := models
 INSIGHTFACE_DIR := $(MODEL_DIR)/.insightface/models/buffalo_l
-MODEL_URL := https://huggingface.co/AVGRadmin/model-pool
+MODEL_URL := https://huggingface.co/hacksider/deep-live-cam
 # Args
 SERVICE ?= Deep-Live-Cam-Multi-Language
 IMAGE ?= deep-swap:latest-cuda-$(CUDA_VERSION)
@@ -44,7 +44,7 @@ clean-all: clean
 setup-models: clean 
 	git clone $(MODEL_URL) tmp
 	rm -rf models
-	mv tmp/models models
+	mv tmp/* models/
 	rm -rf tmp
 
 
