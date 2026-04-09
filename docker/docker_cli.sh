@@ -31,12 +31,19 @@ debug_info() {
 
 # Use when processing in no-UI mode
 process_folders() {
-    
+
+    # Only use brackets if FRAME_PROCESSOR contains a comma (multiple values)
+    if [[ "${FRAME_PROCESSOR}" == *","* ]]; then
+        local frame_processor_arg="{${FRAME_PROCESSOR}}"
+    else
+        local frame_processor_arg="${FRAME_PROCESSOR}"
+    fi
+
     local cmd="python3 run.py \
         -sf \"${SOURCE_FOLDER}\" \
         -tf \"${TARGET_FOLDER}\" \
         -o \"${OUTPUT_FOLDER}\" \
-        --frame-processor {${FRAME_PROCESSOR}} \
+        --frame-processor ${frame_processor_arg} \
         --execution-threads ${THREADS} \
         --max-memory ${MAX_MEM}"
 
